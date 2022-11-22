@@ -13,13 +13,7 @@ const OutputView = {
    */
   printMap(input, flag) {
     this.mergeArray(input, flag);
-
-    MissionUtils.Console.print(
-      '[' + String(UP.join(' | ')) + ']'
-    );
-    MissionUtils.Console.print(
-      '[' + String(DOWN.join(' | ')) + ']'
-    );
+    this.printByString();
   },
 
   /**
@@ -27,16 +21,19 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult() {
-    MissionUtils.Console.print(
-      '[' + String(UP.join(' | ')) + ']'
-    );
-    MissionUtils.Console.print(
-      '[' + String(DOWN.join(' | ')) + ']'
-    );
+  printResult(result, COUNT) {
+    MissionUtils.Console.print("최종 게임 결과\n");
+    this.printByString();
 
-    UP = [];
-    DOWN = [];
+    MissionUtils.Console.print(`게임 성공 여부: ${result}`);
+    MissionUtils.Console.print(`총 시도한 횟수: ${COUNT}`)
+    this.initArray();
+  },
+
+  printByString() {
+    let upperCase = String(UP.join(' | '));
+    let downCase = String(DOWN.join(' | '));
+    MissionUtils.Console.print(`[ ${upperCase} ]\n[ ${downCase} ]\n`);
   },
 
   mergeArray(input, flag) {
@@ -64,6 +61,11 @@ const OutputView = {
     }
     return ITEM;
   },
+
+  initArray() {
+    UP = [];
+    DOWN = [];
+  }
 };
 
 module.exports = OutputView;
